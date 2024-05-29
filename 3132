@@ -1,0 +1,21 @@
+class Solution {
+    public int minimumAddedInteger(int[] nums1, int[] nums2) {
+        int[] ct1 = new int[3001];
+        int[] ct2 = new int[3001];
+        for (int x : nums1)
+            ct1[x + 1000]++;
+        for (int x : nums2)
+            ct2[x + 1000]++;
+        for (int i = -1000; i <= 1000; ++i) {
+            int diff = 0;
+            for (int j = 1000; j <= 2000; ++j) {
+                if (ct1[j] < ct2[i + j])
+                    diff += 10;
+                diff += ct1[j] - ct2[i + j];
+            }
+            if (diff <= 2)
+                return i;
+        }
+        return 1000000;
+    }
+}
