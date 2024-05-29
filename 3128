@@ -1,0 +1,27 @@
+class Solution {
+    public int numberOfRightTriangles(int[][] grid) {
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int[] rowCounts = new int[rows];
+        int[] colCounts = new int[cols];
+        Arrays.fill(rowCounts, 0);
+        Arrays.fill(colCounts, 0);
+        for (int r = 0; r < rows; ++r) {
+            for (int c = 0; c < cols; ++c) {
+                if (grid[r][c] == 1) {
+                    rowCounts[r]++;
+                    colCounts[c]++;
+                }
+            }
+        }
+        int triangles = 0;
+        for (int r = 0; r < rows; ++r) {
+            for (int c = 0; c < cols; ++c) {
+                if (grid[r][c] == 1) {
+                    triangles += (rowCounts[r] - 1) * (colCounts[c] - 1);
+                }
+            }
+        }
+        return triangles;
+    }
+}
